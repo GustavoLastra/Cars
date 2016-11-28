@@ -16,9 +16,10 @@ var myGamePiece;
 var mycar;
 var myObstacles = [];
 var myScore;
+var tree;
 
 function startGame() {
-    mycar= new component(40, 40, "cart.png",20,300,"image")
+    mycar= new component(100, 100, "cart.png",20,300,"image")
     myGamePiece = new component(30, 30, "red", 10, 120);
     myGamePiece.gravity = 0.005;
     mycar.gravity=0.002;
@@ -29,8 +30,8 @@ function startGame() {
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 480;
-        this.canvas.height = 270;
+        this.canvas.width = 1250;
+        this.canvas.height = 500;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
@@ -120,8 +121,8 @@ function updateGameArea() {
         minGap = 50;
         maxGap = 200;
         gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-        myObstacles.push(new component(10, height, "green", x, 0));
-        myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
+        myObstacles.push(new component(100, height, "tree.png", x, 0, "image"));
+        myObstacles.push(new component(100, x - height - gap, "green", x, height + gap));
     }
     for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].x += -1;
