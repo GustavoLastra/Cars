@@ -27,9 +27,11 @@ var posY;
 var posX;
 
 function startGame() {
-
-
-
+  for (var i = 0; i < 5; i++) {
+    posY= Math.random() * (maxY - minY) + minY;
+    posX= Math.random() * (maxX - minX) + minX;
+    trees.push(new Tree(100, 100, "tree.png", posX, posY));
+  }
     //trees.push(new Tree(100, 100, "tree.png", posX, posY));
     mycar= new Auto(100, 100, "car.png",20,400);
     mycar.gravity=0.002;
@@ -84,10 +86,8 @@ function updateGameArea() {
 
     mycar.newPos();
     mycar.update();
+
     for (var i = 0; i < 5; i++) {
-      posY= Math.random() * (maxY - minY) + minY;
-      posX= Math.random() * (maxX - minX) + minX;
-      trees.push(new Tree(100, 100, "tree.png", posX, posY));
       trees[i].update();
     }
     //myObstacles[i].update();
