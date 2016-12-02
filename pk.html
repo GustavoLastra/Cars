@@ -21,16 +21,16 @@ var maxY=600;
 var minY=350;
 var maxX=20;
 var minX=800;
-var posY= Math.random() * (maxY - minY) + minY;
-var posX= Math.random() * (maxX - minX) + minX;
 var trees = [];
-
+var ntrees = 4;
+var posY;
+var posX;
 
 function startGame() {
 
 
-    //mytree= new Tree.push((100,100,"tree.png",20,posY));
-    trees.push(new Tree(100, 100, "tree.png", posX, posY));
+
+    //trees.push(new Tree(100, 100, "tree.png", posX, posY));
     mycar= new Auto(100, 100, "car.png",20,400);
     mycar.gravity=0.002;
     myGameArea.start();
@@ -80,9 +80,16 @@ function updateGameArea() {
     myGameArea.clear();
     myGameArea.frameNo += 1;
 
+    for (var i = 0; i < 5; i++) {
+      posY= Math.random() * (maxY - minY) + minY;
+      posX= Math.random() * (maxX - minX) + minX;
+      trees.push(new Tree(100, 100, "tree.png", posX, posY));
+      trees[i].update();
+    }
+
     mycar.newPos();
     mycar.update();
-    trees[0].update();
+
     //myObstacles[i].update();
 }
 function everyinterval(n) {
