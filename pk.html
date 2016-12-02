@@ -80,16 +80,16 @@ function updateGameArea() {
     myGameArea.clear();
     myGameArea.frameNo += 1;
 
+
+
+    mycar.newPos();
+    mycar.update();
     for (var i = 0; i < 5; i++) {
       posY= Math.random() * (maxY - minY) + minY;
       posX= Math.random() * (maxX - minX) + minX;
       trees.push(new Tree(100, 100, "tree.png", posX, posY));
       trees[i].update();
     }
-
-    mycar.newPos();
-    mycar.update();
-
     //myObstacles[i].update();
 }
 function everyinterval(n) {
