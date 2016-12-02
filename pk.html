@@ -16,7 +16,14 @@ canvas {
 </head>
 <body onload="startGame()">
 <script>
-var mycar;
+var mycara;
+var mycarb;
+var mycarc;
+var mycard;
+
+var maxg=0.01;
+var ming=0.005;
+
 var maxY=600;
 var minY=350;
 var maxX=20;
@@ -26,15 +33,25 @@ var ntrees = 4;
 var posY;
 var posX;
 
+
+
 function startGame() {
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < ntrees; i++) {
     posY= Math.random() * (maxY - minY) + minY;
     posX= Math.random() * (maxX - minX) + minX;
     trees.push(new Tree(100, 100, "tree.png", posX, posY));
   }
     //trees.push(new Tree(100, 100, "tree.png", posX, posY));
-    mycar= new Auto(100, 100, "car.png",20,400);
-    mycar.gravity=0.002;
+    mycara= new Auto(100, 100, "car.png",20,400);
+    mycarb= new Auto(100, 100, "car.png",20,450);
+    mycarc= new Auto(100, 100, "car.png",20,500);
+    mycard= new Auto(100, 100, "car.png",20,550);
+
+    mycara.gravity= Math.random() * (maxg - ming) + ming;
+    mycarb.gravity= Math.random() * (maxg - ming) + ming;
+    mycarc.gravity= Math.random() * (maxg - ming) + ming;
+    mycard.gravity= Math.random() * (maxg - ming) + ming;
+
     myGameArea.start();
 }
 var myGameArea = {
@@ -84,10 +101,19 @@ function updateGameArea() {
 
 
 
-    mycar.newPos();
-    mycar.update();
+    mycara.newPos();
+    mycara.update();
 
-    for (var i = 0; i < 5; i++) {
+    mycarb.newPos();
+    mycarb.update();
+
+    mycarc.newPos();
+    mycarc.update();
+
+    mycard.newPos();
+    mycard.update();
+
+    for (var i = 0; i < ntrees; i++) {
       trees[i].update();
     }
     //myObstacles[i].update();
@@ -98,7 +124,10 @@ function everyinterval(n) {
 }
 
 function accelerate(n) {
-    mycar.gravity=n;
+    mycara.gravity=n;
+    mycarb.gravity=n;
+    mycarc.gravity=n;
+    mycard.gravity=n;
 }
 function Tree (width, height, src, posX, posY,a) {
   this.width = width;
