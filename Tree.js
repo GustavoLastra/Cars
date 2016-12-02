@@ -1,36 +1,37 @@
-<script>
-function Auto(width, height, src, posX, posY, image) {
+function Tree (width, height, src, posX, posY,a) {
+  this.width = width;
+  this.height = height;
+  this.speedX = 0;
+  this.speedY = 0;
+  this.x = posX;
+  this.y = posY;
+  this.gravity = 0;
+  this.gravitySpeed = 0;
+  this.image = new Image();              //Attribute
+  this.image.src = src;
 
-    this.image = new Image();              //Attribute
-    this.image.src = src;
-    this.width = width;
-    this.height = height;
-    this.speedX = 0;
-    this.speedY = 0;
-    this.x = posX;
-    this.y = posY;
-    this.gravity = 0;
-    this.gravitySpeed = 0;
-
-    this.update = function() {                       //Methode
-    ctx = myGameArea.context;
-    ctx.drawImage(this.image,this.posX,this.posY,this.width, this.height);
+    this.update = function() {
+        ctx = myGameArea.context;
+        ctx.drawImage(this.image,
+                this.x,
+                this.y,
+                this.width, this.height);
 
     }
-    this.newPos = function() {                      //Methode
+    this.newPos = function() {
         this.gravitySpeed += this.gravity;
         this.x += this.speedX + this.gravitySpeed;
         this.y += this.speedY ;
         this.hitBottom();
     }
-    this.hitBottom = function() {                  //Methode
+    this.hitBottom = function() {
         var rockbottom = myGameArea.canvas.height - this.height;
         if (this.y > rockbottom) {
             this.y = rockbottom;
             this.gravitySpeed = 0;
         }
     }
-    this.crashWith = function(otherobj) {         //Methode 
+    this.crashWith = function(otherobj) {
         var myleft = this.x;
         var myright = this.x + (this.width);
         var mytop = this.y;
@@ -46,5 +47,3 @@ function Auto(width, height, src, posX, posY, image) {
         //return crash;
     }
 }
-
-</script>
