@@ -123,9 +123,6 @@ function Auto (width, height, src, x, y,a) {
   this.mytop = this.y;
   this.mybottom = this.y + (this.height);
 
-  this.onclick = function (e) {
-    this.image.src= "tree.png";
-  };
 
 
   this.update = function() {
@@ -140,6 +137,9 @@ function Auto (width, height, src, x, y,a) {
       this.x += this.speedX + this.gravitySpeed;
       this.y += this.speedY ;
 
+  }
+  this.setImage = function() {
+    this.image.src= "tree.png";
   }
 
 
@@ -215,6 +215,7 @@ function whichElement(e) {
         targ=e.srcElement;
     }
     var tname;
+    mycara.setImage();
     tname = targ.tagName;
     alert("You clicked on a " + tname + " element.");
 }
