@@ -14,7 +14,13 @@ canvas {
 
 </style>
 </head>
-<body onload="startGame()">
+<body onload="startGame()" onmousedown="whichElement(event)" >
+
+<p>Click somewhere in the document. An alert box will alert the name of the element you clicked on.</p>
+<h3>This is a heading</h3>
+<img border="0" src= "tree.png" alt="Smiley" width="32" height="32">
+<p>This is a paragraph.</p>
+
 <script>
 var mycara;
 var mycarb;
@@ -33,6 +39,17 @@ var ntrees = 4;
 var posY;
 var posX;
 
+/*this.canvas.click(function (e) {
+var clickedX = e.pageX - this.offsetLeft;
+var clickedY = e.pageY - this.offsetTop;
+
+//for (var i = 0; i < circles.length; i++) {
+    if (clickedX < mycara.myright && clickedX > mycara.myleft && clickedY > mycara.mytop && clickedY <mycara.mybottom) {
+        alert ('clicked number ' + (2 + 1));
+    }
+//    }
+});
+*/
 
 
 function startGame() {
@@ -52,7 +69,18 @@ function startGame() {
     mycarc.gravity= Math.random() * (maxg - ming) + ming;
     mycard.gravity= Math.random() * (maxg - ming) + ming;
 
+    //mycara.onclick = function() {myFunction()};
+    //mycarb.onclick = function() {myFunction()};
+    //mycarc.onclick = function() {myFunction()};
+    //mycard.onclick = function() {myFunction()};
+
+
     myGameArea.start();
+
+
+
+
+
 }
 var myGameArea = {
     canvas : document.createElement("canvas"),
@@ -63,10 +91,19 @@ var myGameArea = {
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, 20);
+
       },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
+
+
+
+
+
+
+
+
 }
 function Auto (width, height, src, x, y,a) {
 
@@ -74,16 +111,28 @@ function Auto (width, height, src, x, y,a) {
   this.image.src = src;
   this.width = width;
   this.height = height;
+  this.bottom = this.y + (this.height);    ///para reconocer si va adelante o atras
   this.speedX = 0;
   this.speedY = 0;
   this.x = x;
   this.y = y;
   this.gravity = 0;
   this.gravitySpeed = 0;
+  this.myleft = this.x;
+  this.myright = this.x + (this.width);
+  this.mytop = this.y;
+  this.mybottom = this.y + (this.height);
+
+  this.onclick = function (e) {
+    this.image.src= "tree.png";
+  };
+
 
   this.update = function() {
   ctx = myGameArea.context;
   ctx.drawImage(this.image,this.x,this.y,this.width, this.height);
+
+
 
   }
   this.newPos = function() {
@@ -94,26 +143,30 @@ function Auto (width, height, src, x, y,a) {
   }
 
 
+
+
 }
+
 function updateGameArea() {
     myGameArea.clear();
     myGameArea.frameNo += 1;
 
-
+    //if()
+    // TODO: Comparar cada suelo de carro con cada suelo de arbol
 
     mycara.newPos();
     mycara.update();
-
+    //mycara.onclick();  prueba
     mycarb.newPos();
     mycarb.update();
-
     mycarc.newPos();
     mycarc.update();
-
     mycard.newPos();
     mycard.update();
 
-    for (var i = 0; i < ntrees; i++) {
+    // TODO: Comparar cada suelo de arbo con los demas arboles
+
+    for (var i = 0; i < ntrees; i++) {       //al frente va el ultimo update
       trees[i].update();
     }
     //myObstacles[i].update();
@@ -132,6 +185,7 @@ function accelerate(n) {
 function Tree (width, height, src, posX, posY,a) {
   this.width = width;
   this.height = height;
+  this.bottom = this.y + (this.height);    ///para reconocer si va adelante o atras
   this.speedX = 0;
   this.speedY = 0;
   this.x = posX;
@@ -147,20 +201,33 @@ function Tree (width, height, src, posX, posY,a) {
                 this.x,
                 this.y,
                 this.width, this.height);
-
     }
-    this.newPos = function() {
-        this.gravitySpeed += this.gravity;
-        this.x += this.speedX + this.gravitySpeed;
-        this.y += this.speedY ;
-
-    }
-
-
 }
+
+function whichElement(e) {
+    var targ;
+    if (!e) {
+        var e = window.event;
+    }
+    if (e.target) {
+        targ=e.target;
+    } else if (e.srcElement) {
+        targ=e.srcElement;
+    }
+    var tname;
+    tname = targ.tagName;
+    alert("You clicked on a " + tname + " element.");
+}
+
+
+
+
+
+
+
 
 </script>
 <br>
-<button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
+//<button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
 </body>
 </html>
