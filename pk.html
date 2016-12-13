@@ -8,7 +8,8 @@
 
 <style>
 canvas {
-    border:1px solid #d3d3d3;
+    border:1
+    px solid #d3d3d3;
     background-image: url("grass.png");
 }
 
@@ -236,7 +237,9 @@ function mouseMoved(e) {
 function mouseClicked(e) {
     var x= e.offsetX;
     var y= e.offsetY;
-    if (x < mycara.getMyRight() && x > mycara.getMyLeft() && y > mycara.getMyTop() && y <mycara.getMyBottom()) {
+    var actualrigth= actualx + mycara.getMyRight();
+    var actualleft= actualy + mycara.getMyLeft();
+    if (x < actualrigth && x > actualx && y > mycara.getMyTop() && y <mycara.getMyBottom()) {
         alert ('clicked car a');
     }
     //alert( "You clicked here: " + x + "," + y);
