@@ -40,6 +40,8 @@ var trees = [];
 var ntrees = 4;
 var posY;
 var posX;
+var actualx;
+var actualy;
 
 /*this.canvas.click(function (e) {
 var clickedX = e.pageX - this.offsetLeft;
@@ -161,11 +163,9 @@ function updateGameArea() {
       trees[i].update();
     }
     //myObstacles[i].update();
-    var posx;
-    var posy;
-    posx = mycara.getPosX();
-    posy = mycara.getPosY();
-    document.getElementById('cara').innerHTML = 'Cara PosX : ' + posx + ' PosY: ' + posy;
+    actualx = mycara.getPosX();
+    actualy = mycara.getPosY();
+    document.getElementById('cara').innerHTML = 'Cara PosX : ' + actualx + ' PosY: ' + actualy;
 }
 function everyinterval(n) {
     if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
@@ -236,7 +236,6 @@ function mouseMoved(e) {
 function mouseClicked(e) {
     var x= e.offsetX;
     var y= e.offsetY;
-
     if (x < mycara.getMyRight() && x > mycara.getMyLeft() && y > mycara.getMyTop() && y <mycara.getMyBottom()) {
         alert ('clicked car a');
     }
