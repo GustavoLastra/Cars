@@ -14,22 +14,23 @@ canvas {
 
 </style>
 </head>
-<body onload="startGame()" onmousedown="whichElement(event)" >
+
+<body onload="startGame()" >
 
 <p>Click somewhere in the document. An alert box will alert the name of the element you clicked on.</p>
 <h3>This is a heading</h3>
 <img border="0" src= "tree.png" alt="Smiley" width="32" height="32">
-<p>This is a paragraph.</p>
+<p id="mouseCoors">MouseCoors</p>
 
 <script>
+//onmousedown="whichElement(this)"
+//onmousedown="showCoords(this)"
 var mycara;
 var mycarb;
 var mycarc;
 var mycard;
-
 var maxg=0.01;
 var ming=0.005;
-
 var maxY=600;
 var minY=350;
 var maxX=20;
@@ -50,8 +51,6 @@ var clickedY = e.pageY - this.offsetTop;
 //    }
 });
 */
-
-
 function startGame() {
   for (var i = 0; i < ntrees; i++) {
     posY= Math.random() * (maxY - minY) + minY;
@@ -69,24 +68,15 @@ function startGame() {
     mycarc.gravity= Math.random() * (maxg - ming) + ming;
     mycard.gravity= Math.random() * (maxg - ming) + ming;
 
-    //mycara.onclick = function() {myFunction()};
-    //mycarb.onclick = function() {myFunction()};
-    //mycarc.onclick = function() {myFunction()};
-    //mycard.onclick = function() {myFunction()};
-
-
     myGameArea.start();
-
-
-
-
-
 }
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
         this.canvas.width = 960;
         this.canvas.height = 701;
+        this.canvas.addEventListener('mousemove', mouseMoved, false);           //eventlistenercanvas
+        this.canvas.addEventListener('click', mouseClicked, false);             //eventlistenercanvas
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
@@ -96,17 +86,8 @@ var myGameArea = {
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
-
-
-
-
-
-
-
-
 }
 function Auto (width, height, src, x, y,a) {
-
   this.image = new Image();              //Attribute
   this.image.src = src;
   this.width = width;
@@ -123,37 +104,34 @@ function Auto (width, height, src, x, y,a) {
   this.mytop = this.y;
   this.mybottom = this.y + (this.height);
 
-
+  this.getPosX = function () {
+    return this.x;
+  }
+  this.getPosY = function () {
+    return this.y;
+  }
 
   this.update = function() {
   ctx = myGameArea.context;
   ctx.drawImage(this.image,this.x,this.y,this.width, this.height);
-
-
-
   }
+
   this.newPos = function() {
       this.gravitySpeed += this.gravity;
       this.x += this.speedX + this.gravitySpeed;
       this.y += this.speedY ;
-
   }
+
   this.setImage = function() {
     this.image.src= "tree.png";
   }
-
-
-
-
 }
 
 function updateGameArea() {
     myGameArea.clear();
     myGameArea.frameNo += 1;
-
     //if()
     // TODO: Comparar cada suelo de carro con cada suelo de arbol
-
     mycara.newPos();
     mycara.update();
     //mycara.onclick();  prueba
@@ -163,9 +141,7 @@ function updateGameArea() {
     mycarc.update();
     mycard.newPos();
     mycard.update();
-
     // TODO: Comparar cada suelo de arbo con los demas arboles
-
     for (var i = 0; i < ntrees; i++) {       //al frente va el ultimo update
       trees[i].update();
     }
@@ -182,6 +158,7 @@ function accelerate(n) {
     mycarc.gravity=n;
     mycard.gravity=n;
 }
+
 function Tree (width, height, src, posX, posY,a) {
   this.width = width;
   this.height = height;
@@ -195,7 +172,13 @@ function Tree (width, height, src, posX, posY,a) {
   this.image = new Image();              //Attribute
   this.image.src = src;
 
-    this.update = function() {
+  this.getPosX = function () {
+    return this.x;
+  }
+  this.getPosY = function () {
+    return this.y;
+  }
+  this.update = function() {
         ctx = myGameArea.context;
         ctx.drawImage(this.image,
                 this.x,
@@ -206,6 +189,8 @@ function Tree (width, height, src, posX, posY,a) {
 
 function whichElement(e) {
     var targ;
+    var clickedX = e.pageX - this.offsetLeft;
+    var clickedY = e.pageY - this.offsetTop;
     if (!e) {
         var e = window.event;
     }
@@ -216,19 +201,37 @@ function whichElement(e) {
     }
     var tname;
     mycara.setImage();
-    tname = targ.tagName;
-    alert("You clicked on a " + tname + " element.");
+    //tname = targ.tagName;
+    //alert("You clicked on a " + tname + " element.");
+    alert("You clicked on X " + clickedX + " on Y" + clickedY );
 }
 
+function mouseMoved(e) {
+    mouseX = e.offsetX;
+    mouseY = e.offsetY;
+    document.getElementById('mouseCoors').innerHTML = 'X: ' + mouseX + ' Y: ' + mouseY;
+}
+
+function mouseClicked(e) {
+    alert( e.offsetX + "," + e.offsetY);
+}
+//x -= gCanvasElement.offsetLeft;
+//y -= gCanvasElement.offsetTop;
+    //document.getElementById("demo").innerHTML = coords;
 
 
-
-
-
-
+/*function whichElement(obj) {
+    var x;
+    var y;
+    obj.setImage();
+    x=obj.getPosX();
+    y=obj.getPosY();
+    //alert("You clicked on a " + tname + " element.");
+    alert("You clicked on X " + x + " on Y" + y );
+}*/
 
 </script>
 <br>
-//<button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
+<p id="demo"></p>
 </body>
 </html>
