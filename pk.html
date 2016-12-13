@@ -69,6 +69,7 @@ function startGame() {
     mycarc.gravity= Math.random() * (maxg - ming) + ming;
     mycard.gravity= Math.random() * (maxg - ming) + ming;
 
+
     myGameArea.start();
 }
 var myGameArea = {
@@ -160,6 +161,11 @@ function updateGameArea() {
       trees[i].update();
     }
     //myObstacles[i].update();
+    var posx;
+    var posy;
+    posx = mycara.getPosX();
+    posy = mycara.getPosY();
+    document.getElementById('cara').innerHTML = 'Cara PosX : ' + posx + ' PosY: ' + posy;
 }
 function everyinterval(n) {
     if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
@@ -224,12 +230,6 @@ function mouseMoved(e) {
 
     mouseX = e.offsetX;
     mouseY = e.offsetY;
-    var x;
-    var y;
-    x = mycara.getPosX();
-    y = mycara.getPosY();
-    document.getElementById('cara').innerHTML = 'Cara PosX : ' + x + ' PosY: ' + y;
-
     document.getElementById('mouseCoors').innerHTML = 'X: ' + mouseX + ' Y: ' + mouseY;
 }
 
