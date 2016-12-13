@@ -21,6 +21,7 @@ canvas {
 <h3>This is a heading</h3>
 <img border="0" src= "tree.png" alt="Smiley" width="32" height="32">
 <p id="mouseCoors">MouseCoors</p>
+<p id="cara">CaraX</p>
 
 <script>
 //onmousedown="whichElement(this)"
@@ -103,6 +104,7 @@ function Auto (width, height, src, x, y,a) {
   this.myright = this.x + (this.width);
   this.mytop = this.y;
   this.mybottom = this.y + (this.height);
+  //this.addEventListener('click', mouseClicked, false);     // addEventListener on auto
 
   this.getMyRight =function() {
     return this.myright;
@@ -219,8 +221,15 @@ function whichElement(e) {
 }
 
 function mouseMoved(e) {
+
     mouseX = e.offsetX;
     mouseY = e.offsetY;
+    var x;
+    var y;
+    x = mycara.getPosX();
+    y = mycara.getPosY();
+    document.getElementById('cara').innerHTML = 'Cara PosX : ' + x + ' PosY: ' + y;
+
     document.getElementById('mouseCoors').innerHTML = 'X: ' + mouseX + ' Y: ' + mouseY;
 }
 
@@ -231,7 +240,6 @@ function mouseClicked(e) {
     if (x < mycara.getMyRight() && x > mycara.getMyLeft() && y > mycara.getMyTop() && y <mycara.getMyBottom()) {
         alert ('clicked car a');
     }
-
     //alert( "You clicked here: " + x + "," + y);
 }
 //x -= gCanvasElement.offsetLeft;
