@@ -104,6 +104,18 @@ function Auto (width, height, src, x, y,a) {
   this.mytop = this.y;
   this.mybottom = this.y + (this.height);
 
+  this.getMyRight =function() {
+    return this.myright;
+  }
+  this.getMyLeft =function() {
+    return this.myleft;
+  }
+  this.getMyTop =function() {
+    return this.mytop;
+  }
+  this.getMyBottom =function() {
+    return this.mybottom;
+  }
   this.getPosX = function () {
     return this.x;
   }
@@ -213,7 +225,14 @@ function mouseMoved(e) {
 }
 
 function mouseClicked(e) {
-    alert( e.offsetX + "," + e.offsetY);
+    var x= e.offsetX;
+    var y= e.offsetY;
+
+    if (x < mycara.getMyRight() && x > mycara.getMyLeft() && y > mycara.getMyTop() && y <mycara.getMyBottom()) {
+        alert ('clicked car a');
+    }
+
+    //alert( "You clicked here: " + x + "," + y);
 }
 //x -= gCanvasElement.offsetLeft;
 //y -= gCanvasElement.offsetTop;
