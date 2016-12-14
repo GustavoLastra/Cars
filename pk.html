@@ -60,10 +60,10 @@ function startGame() {
     trees.push(new Tree(100, 100, "busch.png", posX, posY));
   }
     //trees.push(new Tree(100, 100, "tree.png", posX, posY));
-    mycara= new Auto(100, 100, "carwhite.png",20,310,"plakette2.png");
-    mycarb= new Auto(100, 100, "carblue.png",20,400,"plakette3.png");
-    mycarc= new Auto(100, 100, "carpink.png",20,500,"plakette4.png");
-    mycard= new Auto(100, 100, "caryellow.png",20,600,"plakette2.png");
+    mycara= new Auto(100, 100, "carwhite.png",20,310,"plakette2.png","abgas2.png");
+    mycarb= new Auto(100, 100, "carblue.png",20,400,"plakette3.png", "abgas3.png");
+    mycarc= new Auto(100, 100, "carpink.png",20,500,"plakette4.png","abgas4.png");
+    mycard= new Auto(100, 100, "caryellow.png",20,600,"plakette2.png","abgas2.png");
 
     mycara.gravity= Math.random() * (maxg - ming) + ming;
     mycarb.gravity= Math.random() * (maxg - ming) + ming;
@@ -88,11 +88,13 @@ var myGameArea = {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 }
-function Auto (width, height, src, x, y,p) {
+function Auto (width, height, src, x, y, p, abgas) {
   this.image = new Image();              //Attribute
   this.image.src = src;
   this.plakette = new Image();
   this.plakette.src = p;
+  this.abgas = new Image();
+  this.abgas.src = abgas;
   this.color= "white";
   this.width = width;
   this.height = height;
@@ -132,6 +134,7 @@ function Auto (width, height, src, x, y,p) {
   ctx = myGameArea.context;
   ctx.drawImage(this.image,this.x,this.y,this.width, this.height);
   ctx.drawImage(this.plakette,this.x,this.y,50, 50);
+  ctx.drawImage(this.abgas,this.x-50,this.y+70,50, 25);
   }
 
   this.newPos = function() {
