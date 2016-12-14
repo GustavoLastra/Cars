@@ -17,12 +17,9 @@ canvas {
 </head>
 
 <body onload="startGame()" >
-
-<p>Click somewhere in the document. An alert box will alert the name of the element you clicked on.</p>
-<h3>This is a heading</h3>
-<img border="0" src= "tree.png" alt="Smiley" width="32" height="32">
 <p id="mouseCoors">MouseCoors</p>
 <p id="cara">CaraX</p>
+<p id="acolor">Actualcolor</p>
 
 <script>
 //onmousedown="whichElement(this)"
@@ -43,6 +40,7 @@ var posY;
 var posX;
 var actualx;
 var actualy;
+
 
 /*this.canvas.click(function (e) {
 var clickedX = e.pageX - this.offsetLeft;
@@ -71,8 +69,6 @@ function startGame() {
     mycarb.gravity= Math.random() * (maxg - ming) + ming;
     mycarc.gravity= Math.random() * (maxg - ming) + ming;
     mycard.gravity= Math.random() * (maxg - ming) + ming;
-
-
     myGameArea.start();
 }
 var myGameArea = {
@@ -95,6 +91,7 @@ var myGameArea = {
 function Auto (width, height, src, x, y,a) {
   this.image = new Image();              //Attribute
   this.image.src = src;
+  this.color= "red";
   this.width = width;
   this.height = height;
   this.bottom = this.y + (this.height);    ///para reconocer si va adelante o atras
@@ -140,8 +137,24 @@ function Auto (width, height, src, x, y,a) {
       this.y += this.speedY ;
   }
 
-  this.setImage = function() {
-    this.image.src= "tree.png";
+  this.getColor = function() {
+    return this.color;
+  }
+  this.setColor = function(farbe) {
+    this.color=farbe;
+  }
+
+  this.setImage = function(select) {
+    switch(select){
+      case 1:
+        this.image.src= "cargreen.png";
+        break;
+      case 2:
+        this.image.src= "caryellow.png";
+        break;
+      case 3:
+        this.image.src= "car.png";
+    }
   }
 }
 
@@ -167,6 +180,7 @@ function updateGameArea() {
     actualx = mycara.getPosX();
     actualy = mycara.getPosY();
     document.getElementById('cara').innerHTML = 'Cara PosX : ' + actualx + ' PosY: ' + actualy;
+
 }
 function everyinterval(n) {
     if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
@@ -228,7 +242,6 @@ function whichElement(e) {
 }
 
 function mouseMoved(e) {
-
     mouseX = e.offsetX;
     mouseY = e.offsetY;
     document.getElementById('mouseCoors').innerHTML = 'X: ' + mouseX + ' Y: ' + mouseY;
@@ -239,8 +252,20 @@ function mouseClicked(e) {
     var y= e.offsetY;
     var actualrigth= actualx + mycara.getMyRight();
     var actualleft= actualy + mycara.getMyLeft();
+    document.getElementById('acolor').innerHTML = 'Actual color of my cara: ' + mycara.getColor();
     if (x < actualrigth && x > actualx && y > mycara.getMyTop() && y <mycara.getMyBottom()) {
-        alert ('clicked car a');
+
+        if (mycara.getColor()=="red"){
+          mycara.setImage(1);
+          mycara.setColor("yellow");
+        } else if (mycara.getColor()=="yellow"){
+          mycara.setImage(2);
+          mycara.setColor("green");
+        } else if (mycara.getColor()=="green") {
+          mycara.setImage(3);
+          mycara.setColor("red");
+        }
+        //alert ('clicked car a');
     }
     //alert( "You clicked here: " + x + "," + y);
 }
