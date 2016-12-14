@@ -1,5 +1,5 @@
 function Auto (width, height, src, x, y,a) {
-
+  var hola;
   this.image = new Image();              //Attribute
   this.image.src = src;
   this.width = width;
