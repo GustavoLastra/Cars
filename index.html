@@ -43,6 +43,9 @@ var minY=350;
 var maxX=20;
 var minX=800;
 var trees = [];
+var everyBottom= [];
+var everybody= [];
+var result= [];
 var ntrees = 4;
 var posY;
 var posX;
@@ -86,22 +89,42 @@ function updateGameArea() {
     myGameArea.frameNo += 1;
     // TODO: Comparar cada suelo de carro con cada suelo de arbol
 
-    mycara.newPos();
-    mycara.update();
-    mycarb.newPos();
-    mycarb.update();
-    mycarc.newPos();
-    mycarc.update();
-    mycard.newPos();
-    mycard.update();
-    // TODO: Comparar cada suelo de arbo con los demas arboles
 
-    for (var i = 0; i < ntrees; i++) {       //al frente va el ultimo update
-      trees[i].update();
+    mycara.newPos();
+    mycarb.newPos();
+    mycarc.newPos();
+    mycard.newPos();
+    everybody = [mycara, mycarb, mycarc,mycard, trees[0], trees[1], trees[2], trees[3]];
+    everyBottom = [mycara.getMyBottom(), mycarb.getMyBottom(), mycarc.getMyBottom(),mycard.getMyBottom(), trees[0].getMyBottom(), trees[1].getMyBottom(), trees[2].getMyBottom(), trees[3].getMyBottom()];
+
+    bubbleSort(everyBottom);
+
+    for (var j = 0; j < 8; j++){
+      for (var k = 0; k < 8; k++){
+        if (everyBottom[j] == everybody[k].getMyBottom()){
+          result[j] = everybody[k];
+        }
+      }
     }
 
-    mytree.newPos();
-    mytree.update();
+    for (var l=0; l<8; l++){
+      result[l].update();
+    }
+
+
+    //mycara.update();
+    //mycarb.update();
+    //mycarc.update();
+    //mycard.update();
+
+
+    // TODO: Comparar cada suelo de arbo con los demas arboles
+
+    //for (var i = 0; i < ntrees; i++) {       //al frente va el ultimo update
+    //  trees[i].update();
+    //}
+
+
     //myObstacles[i].update();
     actualax = mycara.getPosX();
     actualay = mycara.getPosY();
@@ -235,6 +258,22 @@ function plakettewechseln(thisCar) {
   document.getElementById('bcolor').innerHTML = 'Color of my carb: ' + mycarb.getColor();
   document.getElementById('ccolor').innerHTML = 'Color of my carc: ' + mycarc.getColor();
   document.getElementById('dcolor').innerHTML = 'Color of my card: ' + mycard.getColor();
+}
+
+function bubbleSort(a)
+{
+    var swapped;
+    do {
+        swapped = false;
+        for (var i=0; i < a.length-1; i++) {
+            if (a[i] > a[i+1]) {
+                var temp = a[i];
+                a[i] = a[i+1];
+                a[i+1] = temp;
+                swapped = true;
+            }
+        }
+    } while (swapped);
 }
 </script>
 <br>

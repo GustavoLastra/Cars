@@ -9,8 +9,16 @@ function Tree (width, height, src, posX, posY) {
   this.gravitySpeed = 0;
   this.image = new Image();              //Attribute
   this.image.src = src;
+  this.myleft = this.x;
+  this.myright = this.x + (this.width);
+  this.mytop = this.y;
+  this.mybottom = this.y + (this.height);
 
-    this.update = function() {
+  this.getMyBottom =function() {
+    return this.mybottom;
+    }
+
+  this.update = function() {
         ctx = myGameArea.context;
         ctx.drawImage(this.image,
                 this.x,
