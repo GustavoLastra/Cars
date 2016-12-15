@@ -35,6 +35,7 @@ var mycara;
 var mycarb;
 var mycarc;
 var mycard;
+var mytree;
 var maxg=0.01;
 var ming=0.005;
 var maxY=600;
@@ -63,13 +64,15 @@ function startGame() {
   myScore = new Score("30px", "Consolas", "black", 280, 40, "text");
   for (var i = 0; i < ntrees; i++) {
     posY= Math.random() * (maxY - minY) + minY;
-    s= Math.random() * (maxX - minX) + minX;
+    posX= Math.random() * (maxX - minX) + minX;
     trees.push(new Tree(100, 100, "img/busch.png", posX, posY));
   }
+
     mycara= new Auto(100, 100, "img/carwhite.png",20,310,"img/plakette2.png","red","green","img/abgas2.png");
     mycarb= new Auto(100, 100, "img/carblue.png",20,400,"img/plakette3.png","yellow","yellow","img/abgas3.png");
     mycarc= new Auto(100, 100, "img/carpink.png",20,500,"img/plakette4.png","green","red","img/abgas4.png");
     mycard= new Auto(100, 100, "img/caryellow.png",20,600,"img/plakette2.png","red","green","img/abgas2.png");
+    mytree= new Tree(100, 100, "img/busch.png", 200, 200);
 
     mycara.gravity= Math.random() * (maxg - ming) + ming;
     mycarb.gravity= Math.random() * (maxg - ming) + ming;
@@ -92,9 +95,13 @@ function updateGameArea() {
     mycard.newPos();
     mycard.update();
     // TODO: Comparar cada suelo de arbo con los demas arboles
+
     for (var i = 0; i < ntrees; i++) {       //al frente va el ultimo update
       trees[i].update();
     }
+
+    mytree.newPos();
+    mytree.update();
     //myObstacles[i].update();
     actualax = mycara.getPosX();
     actualay = mycara.getPosY();
