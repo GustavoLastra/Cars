@@ -58,6 +58,7 @@ var oncea;
 var onceb;
 var oncec;
 var onced;
+var oncefinal=1;
 
 var myScore = new Score("30px", "Consolas", "black", 280, 40, "text");
 var myTotal = new Score("30px", "Consolas", "black", 480, 40, "text");
@@ -71,7 +72,7 @@ function startGame() {
   myTotal.score+= myScore.tempScore;
   myScore.tempScore=0;
 
-  myTotal.text="Tolal: " + myTotal.score;
+  myTotal.text="Score: " + myTotal.score;
   for (var i = 0; i < ntrees; i++) {
     posY= Math.random() * (maxY - minY) + minY;
     posX= Math.random() * (maxX - minX) + minX;
@@ -132,32 +133,32 @@ function updateGameArea() {
     document.getElementById('card').innerHTML = 'Card PosX : ' + actualdx + ' PosY: ' + actualdy;
 
     if(mycara.getPosX()<1000){
-      myScore.text="SCORE: " + myScore.score;
+      myScore.text="Correct: " + myScore.score;
     } else if (mycara.correctColor()&& oncea){
       oncea=0;
       myScore.tempScore += 1;
-      myScore.text="SCORE: " + myScore.score;
+      myScore.text="Correct: " + myScore.score;
     }
     if(mycarb.getPosX()<1000){
-      myScore.text="SCORE: " + myScore.score;
+      myScore.text="Correct: " + myScore.score;
     } else if (mycarb.correctColor()&& onceb){
       onceb=0;
       myScore.tempScore += 1;
-      myScore.text="SCORE: " + myScore.score;
+      myScore.text="Correct: " + myScore.score;
     }
     if(mycarc.getPosX()<1000){
-      myScore.text="SCORE: " + myScore.score;
+      myScore.text="Correct: " + myScore.score;
     } else if (mycarc.correctColor()&& oncec){
       oncec=0;
       myScore.tempScore += 1;
-      myScore.text="SCORE: " + myScore.score;
+      myScore.text="Correct: " + myScore.score;
     }
     if(mycard.getPosX()<1000){
-      myScore.text="SCORE: " + myScore.score;
+      myScore.text="Correct: " + myScore.score;
     } else if (mycard.correctColor()&& onced){
       onced=0;
       myScore.tempScore += 1;
-      myScore.text="SCORE: " + myScore.score;
+      myScore.text="Correct: " + myScore.score;
     }
     myScore.score= myScore.tempScore;
 
@@ -166,6 +167,12 @@ function updateGameArea() {
 
     if (myScore.tempScore==4){
       startGame()
+    }else if((actualax>1000) && (actualbx>1000) && (actualcx>1000) && (actualdx>1000) && (oncefinal==1)){
+      oncefinal=0;
+      myTotal.score+= myScore.tempScore;
+      myTotal.text="Score: " + myTotal.score;
+      myTotal.update();
+      //startGame()
     }
 
 }
