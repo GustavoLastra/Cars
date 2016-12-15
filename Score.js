@@ -4,6 +4,7 @@ function Score(width, height, color, x, y, type) {
         this.image = new Image();
         this.image.src = color;
     }
+    this.tempScore=0;
     this.score = 0;
     this.width = width;
     this.height = height;

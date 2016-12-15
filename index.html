@@ -6,7 +6,6 @@
 <script src="Auto.js" type="text/javascript"></script>
 <script src="Score.js" type="text/javascript"></script>
 <script src="myGameArea.js" type="text/javascript"></script>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <style>
 canvas {
@@ -14,10 +13,8 @@ canvas {
     px solid #d3d3d3;
     background-image: url("img/grass.png");
 }
-
 </style>
 </head>
-
 <body onload="startGame()" >
 <p id="mouseCoors">MouseCoors</p>
 <p id="cara">CaraX</p>
@@ -30,7 +27,7 @@ canvas {
 <p id="dcolor">Actualcolor</p>
 
 <script>
-var myScore;
+
 var mycara;
 var mycarb;
 var mycarc;
@@ -57,14 +54,22 @@ var actualcx;
 var actualcy;
 var actualdx;
 var actualdy;
-var oncea=1;
-var onceb=1;
-var oncec=1;
-var onced=1;
+var oncea;
+var onceb;
+var oncec;
+var onced;
+
+var myScore;
+myScore = new Score("30px", "Consolas", "black", 280, 40, "text");
 
 
 function startGame() {
-  myScore = new Score("30px", "Consolas", "black", 280, 40, "text");
+  oncea=1;
+  onceb=1;
+  oncec=1;
+  onced=1;
+  myScore.score+= myScore.tempScore;
+  myScore.tempScore=0;
   for (var i = 0; i < ntrees; i++) {
     posY= Math.random() * (maxY - minY) + minY;
     posX= Math.random() * (maxX - minX) + minX;
@@ -111,21 +116,6 @@ function updateGameArea() {
       result[l].update();
     }
 
-
-    //mycara.update();
-    //mycarb.update();
-    //mycarc.update();
-    //mycard.update();
-
-
-    // TODO: Comparar cada suelo de arbo con los demas arboles
-
-    //for (var i = 0; i < ntrees; i++) {       //al frente va el ultimo update
-    //  trees[i].update();
-    //}
-
-
-    //myObstacles[i].update();
     actualax = mycara.getPosX();
     actualay = mycara.getPosY();
     document.getElementById('cara').innerHTML = 'Cara PosX : ' + actualax + ' PosY: ' + actualay;
@@ -143,36 +133,35 @@ function updateGameArea() {
       myScore.text="SCORE: " + myScore.score;
     } else if (mycara.correctColor()&& oncea){
       oncea=0;
-      myScore.score += 1;
+      myScore.tempScore += 1;
       myScore.text="SCORE: " + myScore.score;
     }
     if(mycarb.getPosX()<1000){
       myScore.text="SCORE: " + myScore.score;
     } else if (mycarb.correctColor()&& onceb){
       onceb=0;
-      myScore.score += 1;
+      myScore.tempScore += 1;
       myScore.text="SCORE: " + myScore.score;
     }
     if(mycarc.getPosX()<1000){
       myScore.text="SCORE: " + myScore.score;
     } else if (mycarc.correctColor()&& oncec){
       oncec=0;
-      myScore.score += 1;
+      myScore.tempScore += 1;
       myScore.text="SCORE: " + myScore.score;
     }
     if(mycard.getPosX()<1000){
       myScore.text="SCORE: " + myScore.score;
     } else if (mycard.correctColor()&& onced){
       onced=0;
-      myScore.score += 1;
+      myScore.tempScore += 1;
       myScore.text="SCORE: " + myScore.score;
     }
     myScore.update();
 
-    if (myScore.score==4){
+    if (myScore.tempScore==4){
       startGame()
     }
-
 }
 function everyinterval(n) {
     if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
