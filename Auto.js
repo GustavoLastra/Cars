@@ -1,47 +1,88 @@
-function Auto (width, height, src, x, y,a) {
-  var hola;
+function Auto (width, height, src, x, y, p,color, cc, abgas) {
   this.image = new Image();              //Attribute
   this.image.src = src;
+  this.plakette = new Image();
+  this.plakette.src = p;
+  this.abgas = new Image();
+  this.abgas.src = abgas;
+  this.color= color;
+  this.correctcolor = cc;
   this.width = width;
   this.height = height;
+  this.bottom = this.y + (this.height);    ///para reconocer si va adelante o atras
   this.speedX = 0;
   this.speedY = 0;
+  this.maxx=1000;
   this.x = x;
   this.y = y;
   this.gravity = 0;
   this.gravitySpeed = 0;
+  this.myleft = this.x;
+  this.myright = this.x + (this.width);
+  this.mytop = this.y;
+  this.mybottom = this.y + (this.height);
+  //this.addEventListener('click', mouseClicked, false);     // addEventListener on auto
+
+  this.getMyRight =function() {
+    return this.myright;
+  }
+  this.getMyLeft =function() {
+    return this.myleft;
+  }
+  this.getMyTop =function() {
+    return this.mytop;
+  }
+  this.getMyBottom =function() {
+    return this.mybottom;
+  }
+  this.getPosX = function () {
+    return this.x;
+  }
+  this.getPosY = function () {
+    return this.y;
+  }
 
   this.update = function() {
   ctx = myGameArea.context;
   ctx.drawImage(this.image,this.x,this.y,this.width, this.height);
-
+  ctx.drawImage(this.plakette,this.x,this.y,50, 50);
+  ctx.drawImage(this.abgas,this.x-50,this.y+70,50, 25);
   }
+
   this.newPos = function() {
       this.gravitySpeed += this.gravity;
-      this.x += this.speedX + this.gravitySpeed;
+      if(this.x<=this.maxx){
+        this.x += this.speedX + this.gravitySpeed;
+      }
       this.y += this.speedY ;
-      this.hitBottom();
   }
-  this.hitBottom = function() {
-      var rockbottom = myGameArea.canvas.height - this.height;
-      if (this.y > rockbottom) {
-          this.y = rockbottom;
-          this.gravitySpeed = 0;
-      }
+
+  this.getColor = function() {
+    return this.color;
   }
-  this.crashWith = function(otherobj) {
-      var myleft = this.x;
-      var myright = this.x + (this.width);
-      var mytop = this.y;
-      var mybottom = this.y + (this.height);
-      var otherleft = otherobj.x;
-      var otherright = otherobj.x + (otherobj.width);
-      var othertop = otherobj.y;
-      var otherbottom = otherobj.y + (otherobj.height);
-      var crash = true;
-      if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
-          crash = false;
-      }
-      return crash;
+
+  this.setColor = function(farbe) {
+    this.color=farbe;
+  }
+
+  this.correctColor = function() {
+    if (this.getColor()== cc){
+      return 1;
+    }else {
+      return 0;
+    }
+  }
+
+  this.setImage = function(select) {
+    switch(select){
+      case 1:
+        this.plakette.src= "img/plakette4.png";
+        break;
+      case 2:
+        this.plakette.src= "img/plakette3.png";
+        break;
+      case 3:
+        this.plakette.src= "img/plakette2.png";
+    }
   }
 }

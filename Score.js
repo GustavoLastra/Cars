@@ -1,27 +1,39 @@
-function Tree (width, height, src, posX, posY,a) {
-  this.width = width;
-  this.height = height;
-  this.speedX = 0;
-  this.speedY = 0;
-  this.x = posX;
-  this.y = posY;
-  this.gravity = 0;
-  this.gravitySpeed = 0;
-  this.image = new Image();              //Attribute
-  this.image.src = src;
-
+function Score(width, height, color, x, y, type) {
+    this.type = type;
+    if (type == "image") {
+        this.image = new Image();
+        this.image.src = color;
+    }
+    this.score = 0;
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;
+    this.x = x;
+    this.y = y;
+    this.gravity = 0;
+    this.gravitySpeed = 0;
     this.update = function() {
         ctx = myGameArea.context;
-        ctx.drawImage(this.image,
+        if (this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+        } else if (type == "image") {
+            ctx.drawImage(this.image,
                 this.x,
                 this.y,
                 this.width, this.height);
-
+              }
+        else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
     }
     this.newPos = function() {
         this.gravitySpeed += this.gravity;
-        this.x += this.speedX + this.gravitySpeed;
-        this.y += this.speedY ;
+        this.x += this.speedX;
+        this.y += this.speedY + this.gravitySpeed;
         this.hitBottom();
     }
     this.hitBottom = function() {
@@ -44,6 +56,6 @@ function Tree (width, height, src, posX, posY,a) {
         if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
             crash = false;
         }
-        //return crash;
+        return crash;
     }
 }

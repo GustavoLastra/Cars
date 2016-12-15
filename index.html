@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Plakattekontroller</title>
+<script src="Tree.js" type="text/javascript"></script>
+<script src="Auto.js" type="text/javascript"></script>
+<script src="Score.js" type="text/javascript"></script>
+<script src="myGameArea.js" type="text/javascript"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+canvas {
+    border:1
+    px solid #d3d3d3;
+    background-image: url("img/grass.png");
+}
+
+</style>
+</head>
+
+<body onload="startGame()" >
+<p id="mouseCoors">MouseCoors</p>
+<p id="cara">CaraX</p>
+<p id="carb">CarbX</p>
+<p id="carc">CarcX</p>
+<p id="card">CardX</p>
+<p id="acolor">Actualcolor</p>
+<p id="bcolor">Actualcolor</p>
+<p id="ccolor">Actualcolor</p>
+<p id="dcolor">Actualcolor</p>
+
+<script>
+var myScore;
+var mycara;
+var mycarb;
+var mycarc;
+var mycard;
+var maxg=0.01;
+var ming=0.005;
+var maxY=600;
+var minY=350;
+var maxX=20;
+var minX=800;
+var trees = [];
+var ntrees = 4;
+var posY;
+var posX;
+var actualax;
+var actualay;
+var actualbx;
+var actualby;
+var actualcx;
+var actualcy;
+var actualdx;
+var actualdy;
+var oncea=1;
+var onceb=1;
+var oncec=1;
+var onced=1;
+
+
+function startGame() {
+  myScore = new Score("30px", "Consolas", "black", 280, 40, "text");
+  for (var i = 0; i < ntrees; i++) {
+    posY= Math.random() * (maxY - minY) + minY;
+    s= Math.random() * (maxX - minX) + minX;
+    trees.push(new Tree(100, 100, "img/busch.png", posX, posY));
+  }
+    mycara= new Auto(100, 100, "img/carwhite.png",20,310,"img/plakette2.png","red","green","img/abgas2.png");
+    mycarb= new Auto(100, 100, "img/carblue.png",20,400,"img/plakette3.png","yellow","yellow","img/abgas3.png");
+    mycarc= new Auto(100, 100, "img/carpink.png",20,500,"img/plakette4.png","green","red","img/abgas4.png");
+    mycard= new Auto(100, 100, "img/caryellow.png",20,600,"img/plakette2.png","red","green","img/abgas2.png");
+
+    mycara.gravity= Math.random() * (maxg - ming) + ming;
+    mycarb.gravity= Math.random() * (maxg - ming) + ming;
+    mycarc.gravity= Math.random() * (maxg - ming) + ming;
+    mycard.gravity= Math.random() * (maxg - ming) + ming;
+    myGameArea.start();
+}
+
+function updateGameArea() {
+    myGameArea.clear();
+    myGameArea.frameNo += 1;
+    // TODO: Comparar cada suelo de carro con cada suelo de arbol
+
+    mycara.newPos();
+    mycara.update();
+    mycarb.newPos();
+    mycarb.update();
+    mycarc.newPos();
+    mycarc.update();
+    mycard.newPos();
+    mycard.update();
+    // TODO: Comparar cada suelo de arbo con los demas arboles
+    for (var i = 0; i < ntrees; i++) {       //al frente va el ultimo update
+      trees[i].update();
+    }
+    //myObstacles[i].update();
+    actualax = mycara.getPosX();
+    actualay = mycara.getPosY();
+    document.getElementById('cara').innerHTML = 'Cara PosX : ' + actualax + ' PosY: ' + actualay;
+    actualbx = mycarb.getPosX();
+    actualby = mycarb.getPosY();
+    document.getElementById('carb').innerHTML = 'Carb PosX : ' + actualbx + ' PosY: ' + actualby;
+    actualcx = mycarc.getPosX();
+    actualcy = mycarc.getPosY();
+    document.getElementById('carc').innerHTML = 'Carc PosX : ' + actualcx + ' PosY: ' + actualcy;
+    actualdx = mycard.getPosX();
+    actualdy = mycard.getPosY();
+    document.getElementById('card').innerHTML = 'Card PosX : ' + actualdx + ' PosY: ' + actualdy;
+
+    if(mycara.getPosX()<1000){
+      myScore.text="SCORE: " + myScore.score;
+    } else if (mycara.correctColor()&& oncea){
+      oncea=0;
+      myScore.score += 1;
+      myScore.text="SCORE: " + myScore.score;
+    }
+    if(mycarb.getPosX()<1000){
+      myScore.text="SCORE: " + myScore.score;
+    } else if (mycarb.correctColor()&& onceb){
+      onceb=0;
+      myScore.score += 1;
+      myScore.text="SCORE: " + myScore.score;
+    }
+    if(mycarc.getPosX()<1000){
+      myScore.text="SCORE: " + myScore.score;
+    } else if (mycarc.correctColor()&& oncec){
+      oncec=0;
+      myScore.score += 1;
+      myScore.text="SCORE: " + myScore.score;
+    }
+    if(mycard.getPosX()<1000){
+      myScore.text="SCORE: " + myScore.score;
+    } else if (mycard.correctColor()&& onced){
+      onced=0;
+      myScore.score += 1;
+      myScore.text="SCORE: " + myScore.score;
+    }
+    myScore.update();
+
+
+}
+function everyinterval(n) {
+    if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+    return false;
+}
+
+function accelerate(n) {
+    mycara.gravity=n;
+    mycarb.gravity=n;
+    mycarc.gravity=n;
+    mycard.gravity=n;
+}
+
+function whichElement(e) {
+    var targ;
+    var clickedX = e.pageX - this.offsetLeft;
+    var clickedY = e.pageY - this.offsetTop;
+    if (!e) {
+        var e = window.event;
+    }
+    if (e.target) {
+        targ=e.target;
+    } else if (e.srcElement) {
+        targ=e.srcElement;
+    }
+    var tname;
+    mycara.setImage();
+    //tname = targ.tagName;
+    //alert("You clicked on a " + tname + " element.");
+    alert("You clicked on X " + clickedX + " on Y" + clickedY );
+}
+
+function mouseMoved(e) {
+    mouseX = e.offsetX;
+    mouseY = e.offsetY;
+    document.getElementById('mouseCoors').innerHTML = 'X: ' + mouseX + ' Y: ' + mouseY;
+}
+
+function mouseClicked(e) {
+  var x= e.offsetX;
+  var y= e.offsetY;
+    whichCar(x,y);
+    //alert( "You clicked here: " + x + "," + y);
+}
+function whichCar(x,y){
+
+  var actualrigtha= actualax + mycara.getMyRight();
+  var actuallefta= actualay + mycara.getMyLeft();
+  if (x < actualrigtha && x > actualax && y > mycara.getMyTop() && y <mycara.getMyBottom()) {
+      plakettewechseln(mycara);
+  }
+  var actualrigthb= actualbx + mycarb.getMyRight();
+  var actualleftb= actualby + mycarb.getMyLeft();
+
+  if (x < actualrigthb && x > actualbx && y > mycarb.getMyTop() && y <mycarb.getMyBottom()) {
+      plakettewechseln(mycarb);
+  }
+  var actualrigthc= actualcx + mycarc.getMyRight();
+  var actualleftc= actualcy + mycarc.getMyLeft();
+
+  if (x < actualrigthc && x > actualcx && y > mycarc.getMyTop() && y <mycarc.getMyBottom()) {
+      plakettewechseln(mycarc);
+  }
+  var actualrigthd= actualdx + mycard.getMyRight();
+  var actualleftd= actualdy + mycard.getMyLeft();
+  if (x < actualrigthd && x > actualdx && y > mycard.getMyTop() && y <mycard.getMyBottom()) {
+      plakettewechseln(mycard);
+  }
+
+}
+function plakettewechseln(thisCar) {
+  if (thisCar.getColor()=="red"){
+    thisCar.setImage(1);
+    thisCar.setColor("green");
+  } else if (thisCar.getColor()=="green"){
+    thisCar.setImage(2);
+    thisCar.setColor("yellow");
+  } else if (thisCar.getColor()=="yellow") {
+    thisCar.setImage(3);
+    thisCar.setColor("red");
+  }
+  document.getElementById('acolor').innerHTML = 'Color of my cara: ' + mycara.getColor();
+  document.getElementById('bcolor').innerHTML = 'Color of my carb: ' + mycarb.getColor();
+  document.getElementById('ccolor').innerHTML = 'Color of my carc: ' + mycarc.getColor();
+  document.getElementById('dcolor').innerHTML = 'Color of my card: ' + mycard.getColor();
+}
+</script>
+<br>
+<p id="demo"></p>
+</body>
+</html>
