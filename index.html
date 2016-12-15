@@ -59,17 +59,19 @@ var onceb;
 var oncec;
 var onced;
 
-var myScore;
-myScore = new Score("30px", "Consolas", "black", 280, 40, "text");
-
+var myScore = new Score("30px", "Consolas", "black", 280, 40, "text");
+var myTotal = new Score("30px", "Consolas", "black", 480, 40, "text");
 
 function startGame() {
   oncea=1;
   onceb=1;
   oncec=1;
   onced=1;
-  myScore.score+= myScore.tempScore;
+
+  myTotal.score+= myScore.tempScore;
   myScore.tempScore=0;
+
+  myTotal.text="Tolal: " + myTotal.score;
   for (var i = 0; i < ntrees; i++) {
     posY= Math.random() * (maxY - minY) + minY;
     posX= Math.random() * (maxX - minX) + minX;
@@ -157,11 +159,15 @@ function updateGameArea() {
       myScore.tempScore += 1;
       myScore.text="SCORE: " + myScore.score;
     }
+    myScore.score= myScore.tempScore;
+
     myScore.update();
+    myTotal.update();
 
     if (myScore.tempScore==4){
       startGame()
     }
+
 }
 function everyinterval(n) {
     if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
