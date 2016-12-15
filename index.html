@@ -169,6 +169,8 @@ function updateGameArea() {
       startGame()
     }else if((actualax>1000) && (actualbx>1000) && (actualcx>1000) && (actualdx>1000) && (oncefinal==1)){
       oncefinal=0;
+      myScore.text="Correct: " + myScore.score;
+      myScore.update();
       myTotal.score+= myScore.tempScore;
       myTotal.text="Score: " + myTotal.score;
       myTotal.update();
