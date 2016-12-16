@@ -26,6 +26,7 @@ function Tree (width, height, src, posX, posY) {
                 this.width, this.height);
 
     }
+
     this.newPos = function() {
         this.gravitySpeed += this.gravity;
         this.x += this.speedX + this.gravitySpeed;

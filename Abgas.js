@@ -1,4 +1,4 @@
-function Score(width, height, color, x, y, type) {
+function Abgas(width, height, x, y, type) {
     this.type = type;
     this.tempScore=0;
     this.score = 0;

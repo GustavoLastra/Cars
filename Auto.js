@@ -45,9 +45,18 @@ function Auto (width, height, src, x, y, p,color, cc, abgas) {
   this.update = function() {
   ctx = myGameArea.context;
   ctx.drawImage(this.image,this.x,this.y,this.width, this.height);
-  ctx.drawImage(this.plakette,this.x,this.y,50, 50);
-  ctx.drawImage(this.abgas,this.x-50,this.y+70,50, 25);
-  }
+  ctx.drawImage(this.plakette,this.x,this.y,60, 60);
+  ctx.drawImage(this.abgas,this.x-50,this.y+70,50,25);
+
+  /*if(this.abgas.src == "img/abgas2.png") {
+    ctx.drawImage(this.abgas,this.x-50,this.y+70,50,25);
+  } else if(this.abgas.src == "img/abgas3.png") {
+  ctx.drawImage(this.abgas,this.x-50,this.y+70,70, 45);
+  } else if(this.abgas.src == "img/abgas4.png") {
+  ctx.drawImage(this.abgas,this.x-50,this.y+70,90, 55);
+}*/
+
+}
 
   this.newPos = function() {
       this.gravitySpeed += this.gravity;
