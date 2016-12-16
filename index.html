@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Plakattekontroller</title>
+
 <script src="Tree.js" type="text/javascript"></script>
 <script src="Auto.js" type="text/javascript"></script>
 <script src="Score.js" type="text/javascript"></script>
@@ -15,16 +16,18 @@ canvas {
 }
 </style>
 </head>
-<body onload="startGame()" >
-<p id="mouseCoors">MouseCoors</p>
-<p id="cara">CaraX</p>
-<p id="carb">CarbX</p>
-<p id="carc">CarcX</p>
-<p id="card">CardX</p>
-<p id="acolor">Actualcolor</p>
-<p id="bcolor">Actualcolor</p>
-<p id="ccolor">Actualcolor</p>
-<p id="dcolor">Actualcolor</p>
+<body >
+  <!--<p id="mouseCoors">MouseCoors</p>
+  <p id="cara">CaraX</p>
+  <p id="carb">CarbX</p>
+  <p id="carc">CarcX</p>
+  <p id="card">CardX</p>
+  <p id="acolor">Actualcolor</p>
+  <p id="bcolor">Actualcolor</p>
+  <p id="ccolor">Actualcolor</p>
+  <p id="dcolor">Actualcolor</p> -->
+<button onmousedown="startGame()" >start</button>
+
 
 <script>
 
@@ -62,6 +65,7 @@ var oncefinal=1;
 
 var myScore = new Score("30px", "Consolas", "black", 280, 40, "text");
 var myTotal = new Score("30px", "Consolas", "black", 480, 40, "text");
+var myOver = new Score("100px", "Consolas", "black", 200, 300, "text");
 
 function startGame() {
   oncea=1;
@@ -70,14 +74,17 @@ function startGame() {
   onced=1;
 
   myTotal.score+= myScore.tempScore;
+  myOver.score+= 0;
   myScore.tempScore=0;
 
   myTotal.text="Score: " + myTotal.score;
+  myOver.text="GAME OVER";
   for (var i = 0; i < ntrees; i++) {
     posY= Math.random() * (maxY - minY) + minY;
     posX= Math.random() * (maxX - minX) + minX;
     trees.push(new Tree(100, 100, "img/busch.png", posX, posY));
   }
+
 
     mycara= new Auto(100, 100, "img/carwhite.png",20,310,"img/plakette2.png","red","green","img/abgas2.png");
     mycarb= new Auto(100, 100, "img/carblue.png",20,400,"img/plakette3.png","yellow","yellow","img/abgas3.png");
@@ -121,16 +128,16 @@ function updateGameArea() {
 
     actualax = mycara.getPosX();
     actualay = mycara.getPosY();
-    document.getElementById('cara').innerHTML = 'Cara PosX : ' + actualax + ' PosY: ' + actualay;
+    //document.getElementById('cara').innerHTML = 'Cara PosX : ' + actualax + ' PosY: ' + actualay;
     actualbx = mycarb.getPosX();
     actualby = mycarb.getPosY();
-    document.getElementById('carb').innerHTML = 'Carb PosX : ' + actualbx + ' PosY: ' + actualby;
+    //document.getElementById('carb').innerHTML = 'Carb PosX : ' + actualbx + ' PosY: ' + actualby;
     actualcx = mycarc.getPosX();
     actualcy = mycarc.getPosY();
-    document.getElementById('carc').innerHTML = 'Carc PosX : ' + actualcx + ' PosY: ' + actualcy;
+    //document.getElementById('carc').innerHTML = 'Carc PosX : ' + actualcx + ' PosY: ' + actualcy;
     actualdx = mycard.getPosX();
     actualdy = mycard.getPosY();
-    document.getElementById('card').innerHTML = 'Card PosX : ' + actualdx + ' PosY: ' + actualdy;
+    //document.getElementById('card').innerHTML = 'Card PosX : ' + actualdx + ' PosY: ' + actualdy;
 
     if(mycara.getPosX()<1000){
       myScore.text="Correct: " + myScore.score;
@@ -165,6 +172,7 @@ function updateGameArea() {
     myScore.update();
     myTotal.update();
 
+
     if (myScore.tempScore==4){
       startGame()
     }else if((actualax>1000) && (actualbx>1000) && (actualcx>1000) && (actualdx>1000) && (oncefinal==1)){
@@ -174,7 +182,12 @@ function updateGameArea() {
       myTotal.score+= myScore.tempScore;
       myTotal.text="Score: " + myTotal.score;
       myTotal.update();
+      alert("GAME OVER");
+      document.location.reload();
+      //myOver.text="GAME OVER";
+      //myOver.update();
       //startGame()
+
     }
 
 }
@@ -212,7 +225,7 @@ function whichElement(e) {
 function mouseMoved(e) {
     mouseX = e.offsetX;
     mouseY = e.offsetY;
-    document.getElementById('mouseCoors').innerHTML = 'X: ' + mouseX + ' Y: ' + mouseY;
+    //document.getElementById('mouseCoors').innerHTML = 'X: ' + mouseX + ' Y: ' + mouseY;
 }
 
 function mouseClicked(e) {
@@ -258,10 +271,10 @@ function plakettewechseln(thisCar) {
     thisCar.setImage(3);
     thisCar.setColor("red");
   }
-  document.getElementById('acolor').innerHTML = 'Color of my cara: ' + mycara.getColor();
-  document.getElementById('bcolor').innerHTML = 'Color of my carb: ' + mycarb.getColor();
-  document.getElementById('ccolor').innerHTML = 'Color of my carc: ' + mycarc.getColor();
-  document.getElementById('dcolor').innerHTML = 'Color of my card: ' + mycard.getColor();
+  //document.getElementById('acolor').innerHTML = 'Color of my cara: ' + mycara.getColor();
+  //document.getElementById('bcolor').innerHTML = 'Color of my carb: ' + mycarb.getColor();
+  //document.getElementById('ccolor').innerHTML = 'Color of my carc: ' + mycarc.getColor();
+  //document.getElementById('dcolor').innerHTML = 'Color of my card: ' + mycard.getColor();
 }
 
 function bubbleSort(a)
@@ -281,6 +294,5 @@ function bubbleSort(a)
 }
 </script>
 <br>
-<p id="demo"></p>
 </body>
 </html>
