@@ -107,5 +107,6 @@ hr {
 canvas {
     border:1
     px solid #d3d3d3;
-    background-image: url("Plakkatekontroller/img/grass.png");
+    background-image: url("../img/grass.png");
+    margin-left: 5%;
 }
