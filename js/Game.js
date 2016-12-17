@@ -32,31 +32,36 @@ var oncefinal=1;
 var myScore = new Score("30px", "Consolas", "black", 280, 40, "text");
 var myTotal = new Score("30px", "Consolas", "black", 480, 40, "text");
 var myOver = new Score("100px", "Consolas", "black", 200, 300, "text");
+var reset=0;
 
 function startGame() {
-  oncea=1;
-  onceb=1;
-  oncec=1;
-  onced=1;
-  myTotal.score+= myScore.tempScore;
-  myOver.score+= 0;
-  myScore.tempScore=0;
-  myTotal.text="Score: " + myTotal.score;
-  myOver.text="GAME OVER";
-  for (var i = 0; i < ntrees; i++) {
-    posY= Math.random() * (maxY - minY) + minY;
-    posX= Math.random() * (maxX - minX) + minX;
-    trees.push(new Tree(100, 100, "img/busch.png", posX, posY));
-  }
-    mycara= new Auto(100, 100, "img/carwhite.png",-50,310,"img/plakette2.png","red","green","img/abgas3.png");
-    mycarb= new Auto(100, 100, "img/carblue.png",-50,400,"img/plakette3.png","yellow","yellow","img/abgas30.png");
-    mycarc= new Auto(100, 100, "img/carpink.png",-50,500,"img/plakette4.png","green","red","img/abgas31.png");
-    mycard= new Auto(100, 100, "img/caryellow.png",-50,600,"img/plakette2.png","red","green","img/abgas3.png");
-    mycara.gravity= Math.random() * (maxg - ming) + ming;
-    mycarb.gravity= Math.random() * (maxg - ming) + ming;
-    mycarc.gravity= Math.random() * (maxg - ming) + ming;
-    mycard.gravity= Math.random() * (maxg - ming) + ming;
-    myGameArea.start();
+
+      oncea=1;
+      onceb=1;
+      oncec=1;
+      onced=1;
+      myTotal.score+= myScore.tempScore;
+      myOver.score+= 0;
+      myScore.tempScore=0;
+      myTotal.text="Score: " + myTotal.score;
+      myOver.text="GAME OVER";
+
+      for (var i = 0; i < ntrees; i++) {
+        posY= Math.random() * (maxY - minY) + minY;
+        posX= Math.random() * (maxX - minX) + minX;
+        trees.push(new Tree(100, 100, "img/busch.png", posX, posY));
+      }
+      mycara= new Auto(100, 100, "img/carwhite.png",-50,310,"img/plakette2.png","red","green","img/abgas3.png");
+      mycarb= new Auto(100, 100, "img/carblue.png",-50,400,"img/plakette3.png","yellow","yellow","img/abgas30.png");
+      mycarc= new Auto(100, 100, "img/carpink.png",-50,500,"img/plakette4.png","green","red","img/abgas31.png");
+      mycard= new Auto(100, 100, "img/caryellow.png",-50,600,"img/plakette2.png","red","green","img/abgas3.png");
+      mycara.gravity= Math.random() * (maxg - ming) + ming;
+      mycarb.gravity= Math.random() * (maxg - ming) + ming;
+      mycarc.gravity= Math.random() * (maxg - ming) + ming;
+      mycard.gravity= Math.random() * (maxg - ming) + ming;
+      myGameArea.start();
+
+
 }
 
 function updateGameArea() {
@@ -131,10 +136,10 @@ function updateGameArea() {
       myTotal.score+= myScore.tempScore;
       myTotal.text="Score: " + myTotal.score;
       myTotal.update();
-      alert("GAME OVER");
+      alert("GAME OVER! "+"Your total score is: "+ myTotal.score);
       document.location.reload();
       //myOver.text="GAME OVER";
-      //myOver.update();
+      //myOver.update()
       //startGame()
 
     }
