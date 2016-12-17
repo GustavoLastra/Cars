@@ -12,6 +12,10 @@ hr {
     height: 2px;
     background-color: #868888;
 }
+h5 {
+  font-size: 20px;
+  text-align: left;
+}
 
 .firstrow {
   padding-top: 4%;
