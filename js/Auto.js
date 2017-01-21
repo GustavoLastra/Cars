@@ -9,7 +9,6 @@ function Auto (width, height, src, x, y, p,color, cc, abgas) {
   this.correctcolor = cc;
   this.width = width;
   this.height = height;
-  this.bottom = this.y + (this.height);    ///para reconocer si va adelante o atras
   this.speedX = 0;
   this.speedY = 0;
   this.maxx=1000;

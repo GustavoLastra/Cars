@@ -1,7 +1,4 @@
-function Abgas(width, height, x, y, type) {
-    this.type = type;
-    this.tempScore=0;
-    this.score = 0;
+function Abgas(width, height, x, y) {
     this.width = width;
     this.height = height;
     this.speedX = 0;
