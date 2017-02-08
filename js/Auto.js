@@ -1,70 +1,58 @@
 function Auto (width, height, src, x, y, p,color, cc, abgas) {
-  this.image = new Image();              //Attribute
-  this.image.src = src;
+
+  var myGraph = new Graph(width,height, src, x, y);
+
+
   this.plakette = new Image();
   this.plakette.src = p;
   this.abgas = new Image();
   this.abgas.src = abgas;
   this.color= color;
   this.correctcolor = cc;
-  this.width = width;
-  this.height = height;
+
   this.speedX = 0;
   this.speedY = 0;
   this.maxx=1000;
-  this.x = x;
-  this.y = y;
+
   this.gravity = 0;
   this.gravitySpeed = 0;
-  this.myleft = this.x;
-  this.myright = this.x + (this.width);
-  this.mytop = this.y;
-  this.mybottom = this.y + (this.height);
+
   //this.addEventListener('click', mouseClicked, false);     // addEventListener on auto
 
   this.getMyRight =function() {
-    return this.myright;
+    return myGraph.getMyRight();
   }
   this.getMyLeft =function() {
-    return this.myleft;
+    return myGraph.getMyLeft();
   }
   this.getMyTop =function() {
-    return this.mytop;
+    return myGraph.getMyTop();
   }
   this.getMyBottom =function() {
-    return this.mybottom;
+    return myGraph.getMyBottom();
   }
   this.getPosX = function () {
-    return this.x;
+    return myGraph.getPosX();
   }
   this.getPosY = function () {
-    return this.y;
+    return myGraph.getPosY();
   }
 
   this.update = function() {
   ctx = myGameArea.context;
-  ctx.drawImage(this.image,this.x,this.y,this.width, this.height);
-  ctx.drawImage(this.plakette,this.x,this.y,60, 60);
-  ctx.drawImage(this.abgas,this.x-50,this.y+70,50,25);
-
-  /*if(this.abgas.src == "img/abgas2.png") {
-    ctx.drawImage(this.abgas,this.x-50,this.y+70,50,25);
-  } else if(this.abgas.src == "img/abgas3.png") {
-  ctx.drawImage(this.abgas,this.x-50,this.y+70,70, 45);
-  } else if(this.abgas.src == "img/abgas4.png") {
-  ctx.drawImage(this.abgas,this.x-50,this.y+70,90, 55);
-}*/
+  ctx.drawImage(myGraph.getMyImage(),myGraph.getPosX(),myGraph.getPosY(),myGraph.getWidth(), myGraph.getHeight());
+  ctx.drawImage(this.plakette,myGraph.getPosX(),myGraph.getPosY(),60, 60);
+  ctx.drawImage(this.abgas,myGraph.getPosX()-50,myGraph.getPosY()+70,50,25);
 
 }
-
   this.newPos = function() {
       this.gravitySpeed += this.gravity;
-      if(this.x<=this.maxx){
-        this.x += this.speedX + this.gravitySpeed;
+      if(myGraph.getPosX()<=this.maxx){
+        //myGraph.x+= this.speedX + this.gravitySpeed;
+        myGraph.setPosX(this.speedX + this.gravitySpeed);
       }
-      this.y += this.speedY ;
+      //myGraph.y += this.speedY ;
   }
-
   this.getColor = function() {
     return this.color;
   }

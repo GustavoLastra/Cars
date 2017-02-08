@@ -13,6 +13,20 @@ function Graph (width, height,src, x, y) {
   this.mytop = this.y;
   this.mybottom = this.y + (this.height);
 
+  this.getMyImage =function() {
+    return this.image;
+  }
+
+  this.getMyRight =function() {
+    return this.myright;
+  }
+  this.getMyLeft =function() {
+    return this.myleft;
+  }
+  this.getMyTop =function() {
+    return this.mytop;
+  }
+
   this.getMyBottom =function() {
     return this.mybottom;
     }
@@ -29,6 +43,12 @@ function Graph (width, height,src, x, y) {
   this.getHeight =function() {
     return this.height;
   }
+  this.setPosX =function(accu) {
+    this.x+= accu;
+  }
+
+
+
   this.update = function() {
         ctx = myGameArea.context;
         ctx.drawImage(this.image,
