@@ -5,6 +5,7 @@ function Score(width, height, color, x, y) {
     this.height = height;
     this.x = x;
     this.y = y;
+
     this.update = function() {
         ctx = myGameArea.context;
             ctx.font = this.width + " " + this.height;

@@ -1,5 +1,5 @@
-const MAX_G=0.01;
-const MIN_G=0.005;
+const MAX_B=0.01;
+const MIN_B=0.005;
 const MAX_Y=600;
 const MIN_Y=350;
 const MAX_X=20;
@@ -56,10 +56,10 @@ function startGame() {
       mycard= new Auto(100, 100, "img/caryellow.png",-50,600,"img/plakette2.png","red","green","img/abgas3.png");
 
 
-      mycara.gravity= Math.random() * (MAX_G - MIN_G) + MIN_G;
-      mycarb.gravity= Math.random() * (MAX_G - MIN_G) + MIN_G;
-      mycarc.gravity= Math.random() * (MAX_G - MIN_G) + MIN_G;
-      mycard.gravity= Math.random() * (MAX_G - MIN_G) + MIN_G;
+      mycara.beschleunigung= Math.random() * (MAX_B - MIN_B) + MIN_B;
+      mycarb.beschleunigung= Math.random() * (MAX_B - MIN_B) + MIN_B;
+      mycarc.beschleunigung= Math.random() * (MAX_B - MIN_B) + MIN_B;
+      mycard.beschleunigung= Math.random() * (MAX_B - MIN_B) + MIN_B;
       myGameArea.start();
 }
 
@@ -141,10 +141,10 @@ function everyinterval(n) {
 }
 
 function accelerate(n) {
-    mycara.gravity=n;
-    mycarb.gravity=n;
-    mycarc.gravity=n;
-    mycard.gravity=n;
+    mycara.beschleunigung=n;
+    mycarb.beschleunigung=n;
+    mycarc.beschleunigung=n;
+    mycard.beschleunigung=n;
 }
 
 function mouseMoved(e) {

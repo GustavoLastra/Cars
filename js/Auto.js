@@ -7,8 +7,8 @@ function Auto (width, height, src, x, y, p,color, cc, abgas) {
   this.speedX = 0;
   this.speedY = 0;
   this.maxx=1100;
-  this.gravity = 0;
-  this.gravitySpeed = 0;
+  this.beschleunigung = 0;
+  this.beschleunigungSpeed = 0;
 
   this.getMyRight =function() {
     return myGraph.getMyRight();
@@ -42,9 +42,9 @@ function Auto (width, height, src, x, y, p,color, cc, abgas) {
   }
 
   this.newPos = function() {
-      this.gravitySpeed += this.gravity;
+      this.beschleunigungSpeed += this.beschleunigung;
       if(myGraph.getPosX()<=this.maxx){
-      myGraph.setPosX(this.speedX + this.gravitySpeed);
+      myGraph.setPosX(this.speedX + this.beschleunigungSpeed);
       }
   }
 

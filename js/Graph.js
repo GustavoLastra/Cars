@@ -50,7 +50,7 @@ function Graph (width, height,src, x, y) {
   this.setPosX =function(accu) {
     this.x+= accu;
   }
-  
+
   this.update = function() {
         ctx = myGameArea.context;
         ctx.drawImage(this.image,
