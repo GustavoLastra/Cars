@@ -2,8 +2,9 @@ function Auto (width, height, src, x, y, p,color, cc, abgas) {
   console.log("inicializo auto!!");
 
   var myGraph = new Graph(width,height, src, x, y);
-  this.abgas = new Image();
-  this.abgas.src = abgas;
+  /*this.abgas = new Image();
+  this.abgas.src = abgas;*/
+
   /*var abgasw = 50;
   var abgash = 25;
   var abgasx = myGraph.getPosX();
@@ -20,7 +21,12 @@ function Auto (width, height, src, x, y, p,color, cc, abgas) {
   this.maxx=1000;
   this.gravity = 0;
   this.gravitySpeed = 0;
-  //var myAbgas = new Abgas(abgasw, abgash,abgas,abgasx,abgasy);
+  var myGraph = new Graph(width,height, src, x, y);
+  var abgasw = 50;       /*  */
+  var abgash = 25;
+  var abgasx = myGraph.getPosX();
+  var abgasy = myGraph.getPosY();
+  var myAbgas = new Abgas(abgasw, abgash,abgas,abgasx,abgasy);
 
   //this.addEventListener('click', mouseClicked, false);     // addEventListener on auto
 
@@ -50,7 +56,8 @@ function Auto (width, height, src, x, y, p,color, cc, abgas) {
   //ctx.drawImage(myAbgas.getMyImage(),myAbgas.getPosX(),myAbgas.getPosY(),myAbgas.getWidth(), myAbgas.getHeight());
 
   //myAbgas.update();
-  ctx.drawImage(this.abgas,myGraph.getPosX()-50,myGraph.getPosY()+70,50,25);
+  //ctx.drawImage(this.abgas,myGraph.getPosX()-50,myGraph.getPosY()+70,50,25);
+  ctx.drawImage(myAbgas.getMyImage(),myGraph.getPosX()-50,myGraph.getPosY()+70,50,25);
 
 }
   this.newPos = function() {

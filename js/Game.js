@@ -50,7 +50,7 @@ function startGame() {
         posX= Math.random() * (MAX_X - MIN_X) + MIN_X;
         trees.push(new Tree(100, 100, "img/busch.png", posX, posY));
       }
-      console.log("Creando carros");
+      //console.log("Creando carros");
       mycara= new Auto(100, 100, "img/carwhite.png",-50,310,"img/plakette2.png","red","green","img/abgas3.png");
       mycarb= new Auto(100, 100, "img/carblue.png",-50,400,"img/plakette3.png","yellow","yellow","img/abgas30.png");
       mycarc= new Auto(100, 100, "img/carpink.png",-50,500,"img/plakette4.png","green","red","img/abgas31.png");

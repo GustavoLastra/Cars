@@ -1,18 +1,25 @@
 function Abgas(width, height,src, x, y) {
 
-    console.log("inicio Abgas");
-    var myGraph = new Graph(width,height, src, x, y);
+    var myGraph = new Graph(width,height, src, x, y);   ///prueba Graph
     this.speedX = 0;
     this.speedY = 0;
     this.maxx=1000;
     this.gravity = 0;
     this.gravitySpeed = 0;
 
+    /*this.width = width;    //////DEstapar para prueba sin Graph
+    this.height = height;
+    this.image = new Image();
+    this.image.src = src;
+    this.x = x;
+    this.y = y;*/
+
     //this.update = function() {
     //  console.log("update Abgas");
     //    ctx = myGameArea.context;
     //    ctx.drawImage(myGraph.getMyImage(),myGraph.getPosX(),myGraph.getPosY(),myGraph.getWidth(),myGraph.getHeight());
     //}
+
     this.newPos = function() {
       console.log("newpos Abgas");
       this.gravitySpeed += this.gravity;
@@ -23,7 +30,8 @@ function Abgas(width, height,src, x, y) {
     }
 
     this.getMyImage =function() {
-      return myGraph.getMyImage();
+      return myGraph.getMyImage();  //Prueba Graph
+      //return this.image;
     }
     this.getPosX =function() {
       return myGraph.getPosX();
