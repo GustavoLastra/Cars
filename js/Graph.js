@@ -16,6 +16,9 @@ function Graph (width, height,src, x, y) {
   this.getMyImage =function() {
     return this.image;
   }
+  this.setMyImage = function(img) {
+    this.image.src= img;
+  }
 
   this.getMyRight =function() {
     return this.myright;
