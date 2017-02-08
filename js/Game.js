@@ -60,8 +60,6 @@ function startGame() {
       mycarc.gravity= Math.random() * (MAX_G - MIN_G) + MIN_G;
       mycard.gravity= Math.random() * (MAX_G - MIN_G) + MIN_G;
       myGameArea.start();
-
-
 }
 
 function updateGameArea() {

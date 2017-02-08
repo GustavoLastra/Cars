@@ -7,6 +7,16 @@ function Graph (width, height,src, x, y) {
 
   this.x = x;
   this.y = y;
+
+  this.myleft = this.x;
+  this.myright = this.x + (this.width);
+  this.mytop = this.y;
+  this.mybottom = this.y + (this.height);
+
+  this.getMyBottom =function() {
+    return this.mybottom;
+    }
+
   this.getPosX =function() {
     return this.x;
   }
