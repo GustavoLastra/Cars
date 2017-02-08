@@ -17,7 +17,7 @@ function Abgas(width, height,src, x, y) {
     //this.update = function() {
     //  console.log("update Abgas");
     //    ctx = myGameArea.context;
-    //    ctx.drawImage(myGraph.getMyImage(),myGraph.getPosX(),myGraph.getPosY(),myGraph.getWidth(),myGraph.getHeight());
+    //    return ctx.drawImage(myGraph.getMyImage(),myGraph.getPosX(),myGraph.getPosY(),myGraph.getWidth(),myGraph.getHeight());
     //}
 
     this.newPos = function() {
