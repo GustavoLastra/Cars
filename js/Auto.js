@@ -1,21 +1,26 @@
 function Auto (width, height, src, x, y, p,color, cc, abgas) {
+  console.log("inicializo auto!!");
 
   var myGraph = new Graph(width,height, src, x, y);
-
-
-  this.plakette = new Image();
-  this.plakette.src = p;
   this.abgas = new Image();
   this.abgas.src = abgas;
+  /*var abgasw = 50;
+  var abgash = 25;
+  var abgasx = myGraph.getPosX();
+  var abgasy = myGraph.getPosY();
+  console.log("efsfr",abgasx);
+  console.log(abgasy);
+  */
+  this.plakette = new Image();
+  this.plakette.src = p;
   this.color= color;
   this.correctcolor = cc;
-
   this.speedX = 0;
   this.speedY = 0;
   this.maxx=1000;
-
   this.gravity = 0;
   this.gravitySpeed = 0;
+  //var myAbgas = new Abgas(abgasw, abgash,abgas,abgasx,abgasy);
 
   //this.addEventListener('click', mouseClicked, false);     // addEventListener on auto
 
@@ -42,14 +47,19 @@ function Auto (width, height, src, x, y, p,color, cc, abgas) {
   ctx = myGameArea.context;
   ctx.drawImage(myGraph.getMyImage(),myGraph.getPosX(),myGraph.getPosY(),myGraph.getWidth(), myGraph.getHeight());
   ctx.drawImage(this.plakette,myGraph.getPosX(),myGraph.getPosY(),60, 60);
+  //ctx.drawImage(myAbgas.getMyImage(),myAbgas.getPosX(),myAbgas.getPosY(),myAbgas.getWidth(), myAbgas.getHeight());
+
+  //myAbgas.update();
   ctx.drawImage(this.abgas,myGraph.getPosX()-50,myGraph.getPosY()+70,50,25);
 
 }
   this.newPos = function() {
+      //myAbgas.newPos();
       this.gravitySpeed += this.gravity;
       if(myGraph.getPosX()<=this.maxx){
         //myGraph.x+= this.speedX + this.gravitySpeed;
         myGraph.setPosX(this.speedX + this.gravitySpeed);
+
       }
       //myGraph.y += this.speedY ;
   }
