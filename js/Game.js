@@ -31,7 +31,6 @@ var onced;
 var oncefinal=1;
 var myScore = new Score("30px", "Consolas", "black", 280, 40);
 var myTotal = new Score("30px", "Consolas", "black", 480, 40);
-// myOver = new Score("100px", "Consolas", "black", 200, 300);
 var reset=0;
 
 function startGame() {
@@ -85,16 +84,12 @@ function updateGameArea() {
     }
     actualax = mycara.getPosX();
     actualay = mycara.getPosY();
-    //document.getElementById('cara').innerHTML = 'Cara PosX : ' + actualax + ' PosY: ' + actualay;
     actualbx = mycarb.getPosX();
     actualby = mycarb.getPosY();
-    //document.getElementById('carb').innerHTML = 'Carb PosX : ' + actualbx + ' PosY: ' + actualby;
     actualcx = mycarc.getPosX();
     actualcy = mycarc.getPosY();
-    //document.getElementById('carc').innerHTML = 'Carc PosX : ' + actualcx + ' PosY: ' + actualcy;
     actualdx = mycard.getPosX();
     actualdy = mycard.getPosY();
-    //document.getElementById('card').innerHTML = 'Card PosX : ' + actualdx + ' PosY: ' + actualdy;
     if(mycara.getPosX()<1000){
       myScore.text="Correct: " + myScore.score;
     } else if (mycara.correctColor()&& oncea){
@@ -123,9 +118,9 @@ function updateGameArea() {
       myScore.tempScore += 1;
       myScore.text="Correct: " + myScore.score;
     }
-    myScore.score= myScore.tempScore;
-    myScore.update();
-    myTotal.update();
+      myScore.score= myScore.tempScore;
+      myScore.update();
+      myTotal.update();
     if (myScore.tempScore==4){
       startGame()
     } else if((actualax>1000) && (actualbx>1000) && (actualcx>1000) && (actualdx>1000) && (oncefinal==1)) {
@@ -136,12 +131,9 @@ function updateGameArea() {
       myTotal.text="Score: " + myTotal.score;
       myTotal.update();
       alert("GAME OVER! "+"Your total score is: "+ myTotal.score);
-      document.location.reload();
-      //myOver.text="GAME OVER";
-      //myOver.update()
-      //startGame()
     }
 }
+
 function everyinterval(n) {
     if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
     return false;
@@ -153,17 +145,18 @@ function accelerate(n) {
     mycarc.gravity=n;
     mycard.gravity=n;
 }
+
 function mouseMoved(e) {
     mouseX = e.offsetX;
     mouseY = e.offsetY;
-   //document.getElementById('mouseCoors').innerHTML = 'X: ' + mouseX + ' Y: ' + mouseY;
 }
+
 function mouseClicked(e) {
   var x= e.offsetX;
   var y= e.offsetY;
     whichCar(x,y);
-    //alert( "You clicked here: " + x + "," + y);
 }
+
 function whichCar(x,y) {
   var actualrigtha= actualax + mycara.getMyRight();
   var actuallefta= actualay + mycara.getMyLeft();
@@ -200,10 +193,6 @@ function plakettewechseln(thisCar) {
     thisCar.setImage(3);
     thisCar.setColor("red");
   }
-  //document.getElementById('acolor').innerHTML = 'Color of my cara: ' + mycara.getColor();
-  //document.getElementById('bcolor').innerHTML = 'Color of my carb: ' + mycarb.getColor();
-  //document.getElementById('ccolor').innerHTML = 'Color of my carc: ' + mycarc.getColor();
-  //document.getElementById('dcolor').innerHTML = 'Color of my card: ' + mycard.getColor();
 }
 
 function bubbleSort(a) {
