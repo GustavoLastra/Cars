@@ -6,14 +6,14 @@ function Auto (width, height, src, x, y, p,color, cc, abgas) {
   this.correctcolor = cc;
   this.speedX = 0;
   this.speedY = 0;
-  this.maxx=1000;
+  this.maxx=1100;
   this.gravity = 0;
   this.gravitySpeed = 0;
 
   this.getMyRight =function() {
     return myGraph.getMyRight();
   }
-  
+
   this.getMyLeft =function() {
     return myGraph.getMyLeft();
   }

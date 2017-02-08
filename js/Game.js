@@ -1,5 +1,5 @@
-const MAX_G=0.0018;
-const MIN_G=0.001;
+const MAX_G=0.01;
+const MIN_G=0.005;
 const MAX_Y=600;
 const MIN_Y=350;
 const MAX_X=20;
@@ -54,6 +54,7 @@ function startGame() {
       mycarb= new Auto(100, 100, "img/carblue.png",-50,400,"img/plakette3.png","yellow","yellow","img/abgas30.png");
       mycarc= new Auto(100, 100, "img/carpink.png",-50,500,"img/plakette4.png","green","red","img/abgas31.png");
       mycard= new Auto(100, 100, "img/caryellow.png",-50,600,"img/plakette2.png","red","green","img/abgas3.png");
+
 
       mycara.gravity= Math.random() * (MAX_G - MIN_G) + MIN_G;
       mycarb.gravity= Math.random() * (MAX_G - MIN_G) + MIN_G;
